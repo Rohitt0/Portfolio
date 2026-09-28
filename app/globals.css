@@ -1,0 +1,11 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+:root{--bg:#0d0d0e;--fg:#ececec;--mute:#8b8b90;--line:#2a2a2e}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-sans),system-ui;-webkit-font-smoothing:antialiased}
+/* read-mode column: narrow centre with dashed rails */
+.col{max-width:680px;margin:0 auto;border-inline:1px dashed var(--line)}
+.rule{border-top:1px dashed var(--line)}
+.pad{padding:1.25rem 1.5rem}
+h2{font-family:var(--font-serif);font-size:1.6rem;letter-spacing:-.01em}
+.press{transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .16s}
+.press:active{transform:scale(.97)}
+:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
