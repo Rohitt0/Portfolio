@@ -1,1 +1,1 @@
-module.exports={images:{remotePatterns:[{hostname:'cdn.sanity.io'}]}}
+module.exports = { async rewrites() { return [{ source: '/admin', destination: '/admin/index.html' }] } }

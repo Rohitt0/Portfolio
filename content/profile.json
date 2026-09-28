@@ -1,0 +1,29 @@
+{
+  "socials": [
+    {
+      "label": "LinkedIn",
+      "url": "www.linkedin.com/in/rohitt00"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/Rohitt0"
+    },
+    {
+      "label": "X",
+      "url": "https://x.com/starbeforemoon"
+    },
+    {
+      "label": "Mail",
+      "url": "mailto:rohittsingh2005@gmail.com"
+    }
+  ],
+  "quoteAuthor": "Someone",
+  "name": "Rohit Singh",
+  "banner": "/uploads/chatgpt-image-sep-5-2026-11_26_22-pm.png",
+  "about": "Part time student, part time full-stack tinkerer. I build things that click, scroll and update in real time, and I try to make sure they don't break when you look at them.",
+  "location": "Delhi, IND",
+  "role": "Software Engineer",
+  "avatar": "/uploads/cosmos_2074097668.jpeg",
+  "quote": "Your favourite line.",
+  "ctaText": "Let's talk"
+}
