@@ -48,6 +48,20 @@ collections:
       - { name: liveUrl, label: Live URL, widget: string, required: false }
       - { name: repoUrl, label: Repo URL, widget: string, required: false }
       - { name: order, label: Order (low = first), widget: number, value_type: int, required: false }
+    - name: blog
+    label: Blog
+    folder: content/blog
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: excerpt, label: Excerpt, widget: text, required: false }
+      - { name: body, label: Body, widget: markdown, required: false }
+      - { name: cover, label: Cover image, widget: image, required: false }
+      - { name: date, label: Date, widget: datetime, required: false }
+      - { name: order, label: Order (low = first), widget: number, value_type: int, required: false }    
   - name: tech
     label: Tech Stack
     files:

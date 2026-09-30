@@ -4,8 +4,10 @@
   "order": 1,
   "status": "Live",
   "tech": [
-    "React",
-    "Tailwind CSS"
+    "MongoDB Atlas",
+    "Express",
+    "Yjs",
+    "Codemirror"
   ],
   "cover": "/uploads/image_2026-09-28_172448310.png",
   "title": "CodeRoom",
