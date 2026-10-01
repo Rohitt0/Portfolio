@@ -48,7 +48,7 @@ collections:
       - { name: liveUrl, label: Live URL, widget: string, required: false }
       - { name: repoUrl, label: Repo URL, widget: string, required: false }
       - { name: order, label: Order (low = first), widget: number, value_type: int, required: false }
-    - name: blog
+  - name: blog
     label: Blog
     folder: content/blog
     extension: json

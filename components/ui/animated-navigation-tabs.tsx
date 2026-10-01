@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "motion/react"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 type NavItem = {
@@ -17,34 +18,43 @@ type AnimatedNavigationTabsProps = {
 export function AnimatedNavigationTabs({
   items,
 }: AnimatedNavigationTabsProps) {
-  const [active, setActive] = useState(items[0]?.id)
+  const pathname = usePathname()
   const [hovered, setHovered] = useState<string | null>(null)
+
+  // Determine the active tab from the current URL.
+  const getActiveId = () => {
+    if (pathname === "/") return "home"
+    if (pathname.startsWith("/projects")) return "projects"
+    if (pathname.startsWith("/blog")) return "blog"
+    return null
+  }
+
+  const activeId = getActiveId()
 
   return (
     <nav aria-label="Main navigation">
       <ul className="flex items-center gap-1">
         {items.map((item) => {
-          const isActive = active === item.id
+          const isActive = activeId === item.id
           const isHovered = hovered === item.id
 
           return (
             <li key={item.id}>
               <a
                 href={item.href}
-                onClick={() => setActive(item.id)}
                 onMouseEnter={() => setHovered(item.id)}
                 onMouseLeave={() => setHovered(null)}
                 className={cn(
-                  "relative block overflow-hidden rounded-md px-3 py-2 text-sm transition-colors duration-300",
+                  "relative block overflow-hidden rounded-md px-3 py-2 text-sm transition-colors duration-200",
                   isActive
                     ? "text-[var(--fg)]"
                     : "text-[var(--mute)] hover:text-[var(--fg)]"
                 )}
               >
-                {/* Sliding hover background */}
+                {/* Hover background */}
                 {isHovered && (
                   <motion.span
-                    layoutId="nav-hover"
+                    layoutId="nav-hover-bg"
                     className="absolute inset-0 rounded-md bg-[var(--hover)]"
                     transition={{
                       type: "spring",
@@ -55,7 +65,7 @@ export function AnimatedNavigationTabs({
                   />
                 )}
 
-                {/* Sliding active underline */}
+                {/* Current page underline */}
                 {isActive && (
                   <motion.span
                     layoutId="nav-active"
@@ -69,7 +79,23 @@ export function AnimatedNavigationTabs({
                   />
                 )}
 
-                <span className="relative z-10">{item.label}</span>
+                {/* Hover underline */}
+                {isHovered && !isActive && (
+                  <motion.span
+                    layoutId="nav-hover-line"
+                    className="absolute bottom-0 left-2 right-2 h-px bg-[var(--fg)]"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 35,
+                      mass: 0.7,
+                    }}
+                  />
+                )}
+
+                <span className="relative z-10">
+                  {item.label}
+                </span>
               </a>
             </li>
           )
