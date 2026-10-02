@@ -12,13 +12,22 @@ type AnimatedThemeTogglerProps = {
   className?: string
 }
 
+type ViewTransitionLike = {
+  ready: Promise<void>
+}
+
+type DocumentWithViewTransition = Document & {
+  startViewTransition?: (
+    updateCallback: () => void
+  ) => ViewTransitionLike
+}
+
 export const AnimatedThemeToggler = ({
   className,
 }: AnimatedThemeTogglerProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  // IMPORTANT:
-  // Start the same on server and client to avoid hydration mismatch.
+  // Keep the initial server/client state identical to avoid hydration mismatch.
   const [mounted, setMounted] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
 
@@ -48,8 +57,7 @@ export const AnimatedThemeToggler = ({
 
     const nextDarkMode = !darkMode
 
-    // Start the browser View Transition.
-    const transition = document.startViewTransition(() => {
+    const updateTheme = () => {
       flushSync(() => {
         setDarkMode(nextDarkMode)
 
@@ -63,11 +71,20 @@ export const AnimatedThemeToggler = ({
           nextDarkMode ? "dark" : "light"
         )
       })
-    })
+    }
+
+    const doc = document as DocumentWithViewTransition
+
+    // Fallback for browsers without View Transitions support.
+    if (!doc.startViewTransition) {
+      updateTheme()
+      return
+    }
+
+    const transition = doc.startViewTransition(updateTheme)
 
     await transition.ready
 
-    // Measure the button AFTER the theme has been updated.
     const { left, top, width, height } =
       button.getBoundingClientRect()
 
@@ -79,7 +96,6 @@ export const AnimatedThemeToggler = ({
       Math.max(centerY, window.innerHeight - centerY)
     )
 
-    // Circular reveal from the theme button.
     document.documentElement.animate(
       {
         clipPath: [
@@ -100,7 +116,7 @@ export const AnimatedThemeToggler = ({
     <button
       ref={buttonRef}
       onClick={onToggle}
-      aria-label="Switch theme"
+      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
       className={cn(
         "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full p-2 outline-none focus:outline-none active:outline-none focus:ring-0",
         className

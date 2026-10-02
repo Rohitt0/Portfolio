@@ -1,1 +1,8 @@
-{"title":"Hello, World","excerpt":"First post — edit or delete this from /admin.","body":"Write your post here. This field supports **Markdown**.","date":"2026-09-30","order":1}
+{
+  "title": "The Brain Atrophy",
+  "excerpt": "First post — edit or delete this from /admin.",
+  "body": "The era of doomscrolling began with the launch of tiktok in 2016. An infinitely scrollable collection of videos what could go wrong :). Tiktok was good for creators but not that good for the viewers because scrolling through videos all day long with no turning back fu*ked up the dopamine system more than ever. More than 1000s of year of evolution of the human brain and body just to get cucked by an app in the 21st century",
+  "date": "2026-10-01T23:00:00.000+05:30",
+  "order": 1,
+  "cover": "/uploads/cosmos_786549015.jpg"
+}

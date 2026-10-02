@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { getData, img } from "@/lib/cms"
+import SiteNav from "@/components/SiteNav"
 import { AnimatedNavigationTabs } from "@/components/ui/animated-navigation-tabs"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 
@@ -10,43 +11,7 @@ export default async function ProjectsPage() {
 
   return (
     <main className="col">
-      <nav className="pad rule flex items-center justify-between text-sm">
-        <a
-          href="/"
-          className="font-serif text-2xl"
-        >
-          {p?.name?.split(" ")[0] ?? "Home"}
-        </a>
-
-        <div className="flex items-center gap-2">
-          <AnimatedNavigationTabs
-            items={[
-              {
-                id: "home",
-                label: "Home",
-                href: "/",
-              },
-              {
-                id: "projects",
-                label: "Craft",
-                href: "/projects",
-              },
-              {
-                id: "blog",
-                label: "Blog",
-                href: "/blog",
-              },
-              {
-                id: "tech",
-                label: "Stack",
-                href: "/#tech",
-              },
-            ]}
-          />
-
-          <AnimatedThemeToggler className="ml-2 hover:bg-[var(--hover)]" />
-        </div>
-      </nav>
+      <SiteNav name={p?.name?.split(" ")[0] ?? "Home"} />
 
       <div className="pad rule2 pb-4">
         <h1 className="font-serif text-3xl">Craft</h1>
@@ -58,16 +23,7 @@ export default async function ProjectsPage() {
             key={x._id}
             className="group flex h-full flex-col overflow-hidden rounded-lg border border-[var(--line)] p-4"
           >
-            <div className="relative aspect-video overflow-hidden rounded-lg">
-              {x.cover && (
-                <Image
-                  unoptimized
-                  src={img(x.cover)}
-                  alt={x.title}
-                  fill
-                  className="object-cover transition-transform duration-500 ease-[cubic-bezier(.23,1,.32,1)] group-hover:scale-[1.03]"
-                />
-              )}
+            <div className="relative aspect-video overflow-hidden rounded-lg">{x.cover && <Image unoptimized src={img(x.cover)} alt={x.title} fill className="object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0" />}
 
               {x.badge && (
                 <span className="absolute right-2 top-2 rounded bg-lime-300 px-2 py-0.5 text-xs font-medium text-black">

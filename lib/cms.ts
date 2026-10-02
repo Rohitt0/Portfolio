@@ -1,6 +1,7 @@
 // Reads Decap-managed JSON files from /content at build time.
 import fs from 'fs'
 import path from 'path'
+export const fmtDate = (s?: string) => s ? new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''
 const dir = path.join(process.cwd(), 'content')
 const read = (f: string) => { try { return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')) } catch { return null } }
 const byOrder = (a: any, b: any) => (a.order ?? 999) - (b.order ?? 999)

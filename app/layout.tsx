@@ -1,5 +1,6 @@
 import "./globals.css"
 import { Instrument_Serif, Inter } from "next/font/google"
+import SmoothScroll from "@/components/SmoothScroll"
 import type { Metadata } from "next"
 
 const serif = Instrument_Serif({
@@ -66,7 +67,7 @@ export default function L({
       <head>
         <script dangerouslySetInnerHTML={{ __html: init }} />
       </head>
-      <body>{children}</body>
+      <body>  <SmoothScroll />{children}</body>
     </html>
   )
 }

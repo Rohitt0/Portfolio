@@ -1,8 +1,8 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { motion } from "motion/react"
-import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 type NavItem = {
@@ -13,19 +13,33 @@ type NavItem = {
 
 type AnimatedNavigationTabsProps = {
   items: NavItem[]
+  hash?: string
 }
 
 export function AnimatedNavigationTabs({
   items,
+  hash = "",
 }: AnimatedNavigationTabsProps) {
   const pathname = usePathname()
   const [hovered, setHovered] = useState<string | null>(null)
 
-  // Determine the active tab from the current URL.
   const getActiveId = () => {
-    if (pathname === "/") return "home"
-    if (pathname.startsWith("/projects")) return "projects"
-    if (pathname.startsWith("/blog")) return "blog"
+    if (pathname.startsWith("/projects")) {
+      return "projects"
+    }
+
+    if (pathname.startsWith("/blog")) {
+      return "blog"
+    }
+
+    if (pathname === "/" && hash === "#tech") {
+      return "tech"
+    }
+
+    if (pathname === "/") {
+      return "home"
+    }
+
     return null
   }
 
@@ -51,7 +65,6 @@ export function AnimatedNavigationTabs({
                     : "text-[var(--mute)] hover:text-[var(--fg)]"
                 )}
               >
-                {/* Hover background */}
                 {isHovered && (
                   <motion.span
                     layoutId="nav-hover-bg"
@@ -65,10 +78,9 @@ export function AnimatedNavigationTabs({
                   />
                 )}
 
-                {/* Current page underline */}
                 {isActive && (
                   <motion.span
-                    layoutId="nav-active"
+                    layoutId="nav-active-line"
                     className="absolute bottom-0 left-2 right-2 h-px bg-[var(--fg)]"
                     transition={{
                       type: "spring",
@@ -79,7 +91,6 @@ export function AnimatedNavigationTabs({
                   />
                 )}
 
-                {/* Hover underline */}
                 {isHovered && !isActive && (
                   <motion.span
                     layoutId="nav-hover-line"
@@ -93,9 +104,7 @@ export function AnimatedNavigationTabs({
                   />
                 )}
 
-                <span className="relative z-10">
-                  {item.label}
-                </span>
+                <span className="relative z-10">{item.label}</span>
               </a>
             </li>
           )
