@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
 }
 
-const init = `try{var t=localStorage.getItem('theme')||'dark';document.documentElement.classList.toggle('dark',t==='dark')}catch{}`
+const init=`try{var t=localStorage.getItem('theme')||'dark';document.documentElement.classList.toggle('dark',t==='dark')}catch{}`
 
 export default function L({
   children,
