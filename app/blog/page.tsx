@@ -9,7 +9,7 @@ export default async function BlogPage() {
     return <main className="col">
         <SiteNav name={p?.name?.split(" ")[0] ?? "Home"} />
         <div className="pad rule2 pb-4"><h1 className="font-serif text-3xl">Blog</h1></div>
-        <div className="pad grid gap-3">
+        <div className="pad grid gap-3 sm:grid-cols-2">
             {blog.map((post: any) => {
                 const mins = Math.max(1, Math.round((post.excerpt?.split(' ').length ?? 40) / 4))
                 return <a key={post._id} href={`/blog/${post.slug}`} className="press group overflow-hidden rounded-lg border border-[var(--line)] hover:bg-[var(--hover)]">
