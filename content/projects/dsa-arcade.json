@@ -1,7 +1,9 @@
 {
-  "status": "In progress",
+  "status": "Live",
   "title": "DSA Arcade",
-  "cover": "/uploads/cosmos_275017634.jpg",
+  "cover": "/uploads/image_2026-10-15_210742252.png",
   "order": 1,
-  "tagline": "Gamified dsa learning platform"
+  "tagline": "Gamified dsa learning platform",
+  "liveUrl": "https://dsa-arcade-gilt.vercel.app",
+  "repoUrl": "https://github.com/Rohitt0/dsa-arcade"
 }
